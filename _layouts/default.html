@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/Organization">
+<head>
+{% include head.html %}
+</head>
+<body id="{{page.title | downcase | replace:' ','-' }}">
+
+<main id="content-container">
+
+  <aside id="sidebar" class="main-bg">
+    <polymer-flex-layout id="logo-container" isContainer align="center">
+      <a href="/" class="logo"><img src="/images/logos/lockup.svg"></a>
+      <polymer-ui-icon id="dropdown-toggle" size="35" src="/images/picons/ic_arrowDropDown_dark_.png">
+      </polymer-ui-icon>
+    </polymer-flex-layout>
+
+    {% include dropdown-panel.html %}
+
+    <docs-menu menu="{{site.data.pagetypes[page.type].menu}}" unresolved></docs-menu>
+  </aside>
+  <scroll-area sidebar unresolved>
+    <site-banner type="{{page.type}}" navgroup="{{page.navgroup}}" shortname="{{page.shortname}}" unresolved>
+      {% include top-nav.html %}
+      <header>
+        <h1>{{page.title}}</h1>
+        {% if page.subtitle %}
+          <summary>{{page.subtitle}}</summary>
+        {% else if page.type %}
+          <summary>{{site.data.pagetypes[page.type].headertitle}}</summary>
+        {% endif %}
+      </header>
+    </site-banner>
+
+    {% comment %}
+      Allow individual pages to turn off permalinks
+    {% endcomment %}
+    {% capture permalinks_class %}
+      {% if site.add_permalinks %}
+        {% case page.add_permalinks %} 
+          {% when true %} 
+            show-permalinks
+          {% when false %}
+            {% comment %}
+              Intentionally empty in case variable isn't defined in page.
+            {% endcomment %}
+          {% else %} 
+            show-permalinks 
+        {% endcase %} 
+      {% endif %}
+    {% endcapture %}
+
+    <article class="{{permalinks_class | trim}}">
+      {% include edit_on_github.html %}
+
+      <header class="onlyonmobile">
+        <h1>{{page.title}}</h1>
+        {% if page.subtitle %}
+          <summary>{{page.subtitle}}</summary>
+        {% else if page.type %}
+          <summary>{{site.data.pagetypes[page.type].headertitle}}</summary>
+        {% endif %}
+      </header>
+
+      {{content}}
+    </article>
+
+    {% include footer.html %}
+
+  </scroll-area>
+
+</main>
+
+<page-scrim></page-scrim>
+</body>
+</html>
