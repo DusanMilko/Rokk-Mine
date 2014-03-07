@@ -1,3 +1,8 @@
+---
+This is doc files borrowed from the polymer docs site. Work in progress. Disregard current content.
+
+---
+
 Polymer docs are mostly in Markdown with some HTML. [Jekyll][jekyll] is used to generate the static HTML for the site. The output is generated into a folder called `_site` and served from Google App Engine.
 
 ## Prereqs and installation requirements
@@ -21,7 +26,7 @@ Checkout this repo:
 
 Run the setup script:
 
-    cd docs
+    cd RokkMine
     ./scripts/setup.sh
 
 This will run `npm install`, pull down any external dependencies, and kickoff the `grunt docs` task. **Note:** these scripts can take some time to install.
